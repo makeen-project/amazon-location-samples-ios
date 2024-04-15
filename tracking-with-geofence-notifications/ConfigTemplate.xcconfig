@@ -1,0 +1,8 @@
+// Fill in the below values and rename this file to Config
+//Optional if not provided will be filled by the App config tab
+IDENTITY_POOL_ID =
+MAP_NAME =
+TRACKER_NAME =
+//Optional if not provided will be filled by the App config tab
+GEOFENCE_ARN =
+WEBSOCKET_URL = 

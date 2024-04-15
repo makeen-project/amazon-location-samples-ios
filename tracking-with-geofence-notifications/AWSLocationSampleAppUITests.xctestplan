@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "24E85EAC-93F7-4014-9805-6878234E30A3",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:AWSLocationSampleApp.xcodeproj",
+      "identifier" : "F17B271C2B6A606F0026FAA6",
+      "name" : "AWSLocationSampleApp"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:AWSLocationSampleApp.xcodeproj",
+        "identifier" : "F17B27362B6A60710026FAA6",
+        "name" : "AWSLocationSampleAppUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
