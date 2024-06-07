@@ -1,13 +1,9 @@
 import Foundation
 import SwiftUI
 import AmazonLocationiOSAuthSDK
-import AWSLocationXCF
 import AmazonLocationiOSTrackingSDK
 import CoreLocation
 import MapLibre
-import AWSCore
-import AWSMobileClientXCF
-import AWSIoT
 
 final class AuthViewModel : ObservableObject {
     @Published var trackingButtonText = NSLocalizedString("StartTrackingLabel", comment: "")
