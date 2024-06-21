@@ -135,7 +135,7 @@ struct MapView: UIViewRepresentable {
                             try await trackingViewModel.getTrackingPoints()
                         }
                         catch {
-                            print(error)
+                            trackingViewModel.showErrorAlertPopup(title: "Error", message: "Error in get tracking points: \(error.localizedDescription)")
                         }
                     }
                 }

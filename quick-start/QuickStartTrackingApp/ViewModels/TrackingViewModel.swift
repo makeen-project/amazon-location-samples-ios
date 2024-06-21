@@ -3,6 +3,7 @@ import AmazonLocationiOSAuthSDK
 import AmazonLocationiOSTrackingSDK
 import MapLibre
 import AWSLocation
+import os.log
 
 final class TrackingViewModel : ObservableObject {
     @Published var trackingButtonText = NSLocalizedString("StartTrackingLabel", comment: "")
@@ -99,6 +100,13 @@ final class TrackingViewModel : ObservableObject {
         showAlert = true
     }
     
+    func showErrorAlertPopup(title: String, message: String) {
+        alertTitle = title
+        alertMessage = message
+        showAlert = true
+        os_log("%@", type: .error, message)
+    }
+    
     // Required in info.plist: Privacy - Location When In Use Usage Description
     func startTracking() {
         do {
@@ -116,7 +124,7 @@ final class TrackingViewModel : ObservableObject {
         } catch TrackingLocationError.permissionDenied {
             showLocationDeniedRationale()
         } catch {
-            print("error in tracking")
+            showErrorAlertPopup(title: "Error", message: "Error in tracking: \(error.localizedDescription)")
         }
     }
     

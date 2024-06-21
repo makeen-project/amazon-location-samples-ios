@@ -16,6 +16,13 @@ struct TrackingView: View {
                 Text("Loading...") 
             }
         }
+        .alert(isPresented: $trackingViewModel.showAlert) {
+            Alert(
+                title: Text(trackingViewModel.alertTitle),
+                message: Text(trackingViewModel.alertMessage),
+                dismissButton: .default(Text("OK"))
+            )
+        }
         .onAppear() {
             if !trackingViewModel.identityPoolId.isEmpty {
                 Task {
@@ -23,7 +30,7 @@ struct TrackingView: View {
                         try await trackingViewModel.authWithCognito(identityPoolId: trackingViewModel.identityPoolId)
                     }
                     catch {
-                        print(error)
+                        trackingViewModel.showErrorAlertPopup(title: "Error", message: "Error in authentication with cognito: \(error.localizedDescription)")
                     }
                 }
             }
