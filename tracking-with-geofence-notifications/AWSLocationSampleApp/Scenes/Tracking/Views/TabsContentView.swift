@@ -19,14 +19,16 @@ struct TabsContentView: View {
         }
         .onAppear() {
             if !authViewModel.identityPoolId.isEmpty {
-                authViewModel.authWithCognito(identityPoolId: authViewModel.identityPoolId)
-                if UserDefaultsHelper.get(for: Bool.self, key: .trackingActive) ?? false {
-                    selectedTab = "Tracking"
-                    authViewModel.resumeTracking()
-                }
-                else {
-                    selectedTab = "Config"
-                }
+                    Task {
+                        try await authViewModel.authWithCognito(identityPoolId: authViewModel.identityPoolId)
+                    }
+                    if UserDefaultsHelper.get(for: Bool.self, key: .trackingActive) ?? false {
+                        selectedTab = "Tracking"
+                        authViewModel.resumeTracking()
+                    }
+                    else {
+                        selectedTab = "Config"
+                    }
             }
         }
     }

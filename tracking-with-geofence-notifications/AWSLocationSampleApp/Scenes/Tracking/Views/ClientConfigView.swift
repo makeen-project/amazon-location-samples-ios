@@ -36,8 +36,10 @@ struct ClientConfigView: View {
                         showError = true
                     }
                     else {
-                        authViewModel.saveCognitoConfiguration()
-                        isPresented = false
+                        Task {
+                            try await authViewModel.saveCognitoConfiguration()
+                            isPresented = false
+                        }
                     }
                 }.accessibility(identifier: "SaveConfiguration")
                 Text(errorMessage)

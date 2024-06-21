@@ -3,35 +3,35 @@ import SwiftUI
 struct TrackingBottomView: View {
     @ObservedObject var authViewModel: AuthViewModel
     var body: some View {
-           HStack {
-               Text("Tracking points")
-                   .frame(maxWidth: .infinity, alignment: .leading)
-                   .foregroundColor(Color.primary)
-
-               Button(action: {
-                   if(authViewModel.trackingButtonText == "Start Tracking") {
+           Button(action: {
+                   if(authViewModel.trackingButtonText == NSLocalizedString("StartTrackingLabel", comment: "")) {
                        authViewModel.startTracking()
                    } else {
                        authViewModel.stopTracking()
                    }
-               }) {
-                   Text(authViewModel.trackingButtonText)
-                       .font(.headline)
-                       .foregroundColor(.white)
-                       .padding()
-                       .background(authViewModel.trackingButtonColor)
+           }) {
+               HStack {
+                   Spacer()
+                   Text("Tracking")
+                       .foregroundColor(authViewModel.trackingButtonColor)
+                       .background(.white)
                        .cornerRadius(15.0)
+                   
+                   Image(systemName: authViewModel.trackingButtonIcon)
+                       .resizable()
+                       .frame(width: 24, height: 24)
+                       .padding(5)
+                       .background(.white)
+                       .foregroundColor(authViewModel.trackingButtonColor)
+
                }
-               .accessibility(identifier: "TrackingButton")
            }
-           .frame(maxWidth: 400)
-           .padding()
-           .overlay(
-               RoundedRectangle(cornerRadius: 10)
-                   .stroke(Color.blue, lineWidth: 2)
-           )
-           .clipShape(RoundedRectangle(cornerRadius: 10))
-           .background(Color(UIColor.systemBackground)) // Use system background color for adaptability
-           .edgesIgnoringSafeArea(.bottom)
+           .accessibility(identifier: "TrackingButton")
+           .background(.white)
+           .clipShape(RoundedRectangle(cornerRadius: 8))
+           .padding(.trailing, 10)
+           .padding(.bottom, 40)
+           .frame(width: 130, alignment: .trailing)
+           .shadow(color: Color.black.opacity(0.3), radius: 3, x: 0, y: 2)
        }
 }

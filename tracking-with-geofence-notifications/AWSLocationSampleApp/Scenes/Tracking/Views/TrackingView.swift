@@ -6,8 +6,10 @@ struct TrackingView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             if authViewModel.clientIntialised {
-                MapView(authViewModel: authViewModel)
-                TrackingBottomView(authViewModel: authViewModel)
+                if authViewModel.mapSigningIntialised {
+                    MapView(authViewModel: authViewModel)
+                    TrackingBottomView(authViewModel: authViewModel)
+                }
             }
             else {
                 Text(NSLocalizedString("EnterConfiguration", comment: ""))

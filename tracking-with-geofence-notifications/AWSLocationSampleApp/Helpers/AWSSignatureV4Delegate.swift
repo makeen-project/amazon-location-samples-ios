@@ -2,10 +2,10 @@ import MapLibre
 import AmazonLocationiOSAuthSDK
  
 class AWSSignatureV4Delegate : NSObject, MLNOfflineStorageDelegate {
-    private let awsSigner: AWSSigner
+    private let awsSigner: AWSSignerV4
   
     init(credentialsProvider: LocationCredentialsProvider) {
-        self.awsSigner = AWSSigner(amazonLocationCognitoCredentialsProvider: credentialsProvider.getCognitoProvider()!, serviceName: "geo")
+        self.awsSigner = AWSSignerV4(amazonLocationCognitoCredentialsProvider: credentialsProvider.getCognitoProvider()!, serviceName: "geo")
         super.init()
     }
  

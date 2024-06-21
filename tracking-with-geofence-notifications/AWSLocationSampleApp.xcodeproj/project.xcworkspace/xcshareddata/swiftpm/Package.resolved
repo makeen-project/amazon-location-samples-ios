@@ -1,5 +1,5 @@
 {
-  "originHash" : "239044665d2cad5d31cb581d6b666900f924d208052c281ab9683b689cd7827a",
+  "originHash" : "ec6bc3d090a78589987d65d582af3659e044854e5706f3a37c754934f5807190",
   "pins" : [
     {
       "identity" : "amazon-location-mobile-auth-sdk-ios",
@@ -7,7 +7,7 @@
       "location" : "https://github.com/makeen-project/amazon-location-mobile-auth-sdk-ios.git",
       "state" : {
         "branch" : "main",
-        "revision" : "fd2ff9802e93f60b2cb631b48e92185feaecb9b2"
+        "revision" : "eba6cfe835ed7cee4ac4581cd2ab485c5adb4b29"
       }
     },
     {
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/makeen-project/amazon-location-mobile-tracking-sdk-ios.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "5225623ccbc81481eaf42e95847de91858bb5f8b"
+        "branch" : "iot_feature",
+        "revision" : "01f19c4e557df852437c55a1b9af5307c1a4db8e"
       }
     },
     {
