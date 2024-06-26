@@ -39,7 +39,6 @@ struct MapView: UIViewRepresentable {
         locateMeButton.accessibilityIdentifier = "LocateMeButton"
         
         mapView.addSubview(locateMeButton)
-        
         onMapViewAvailable?(mapView)
         return mapView
     }

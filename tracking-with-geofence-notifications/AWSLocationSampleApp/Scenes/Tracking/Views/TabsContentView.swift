@@ -19,16 +19,23 @@ struct TabsContentView: View {
         }
         .onAppear() {
             if !authViewModel.identityPoolId.isEmpty {
-                    Task {
+                Task {
+                    do {
                         try await authViewModel.authWithCognito(identityPoolId: authViewModel.identityPoolId)
                     }
-                    if UserDefaultsHelper.get(for: Bool.self, key: .trackingActive) ?? false {
-                        selectedTab = "Tracking"
-                        authViewModel.resumeTracking()
+                    catch {
+                        authViewModel.showErrorAlertPopup(title: "Error", message: "Error in authentication with cognito: \(error.localizedDescription)")
                     }
-                    else {
-                        selectedTab = "Config"
+                    DispatchQueue.main.async {
+                        if UserDefaultsHelper.get(for: Bool.self, key: .trackingActive) ?? false {
+                            selectedTab = "Tracking"
+                            authViewModel.resumeTracking()
+                        }
+                        else {
+                            selectedTab = "Config"
+                        }
                     }
+                }
             }
         }
     }

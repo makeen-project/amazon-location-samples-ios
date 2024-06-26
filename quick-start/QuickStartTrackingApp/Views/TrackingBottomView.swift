@@ -4,13 +4,11 @@ struct TrackingBottomView: View {
     @ObservedObject var trackingViewModel: TrackingViewModel
     var body: some View {
            Button(action: {
-               Task {
                    if(trackingViewModel.trackingButtonText == NSLocalizedString("StartTrackingLabel", comment: "")) {
                        trackingViewModel.startTracking()
                    } else {
                        trackingViewModel.stopTracking()
                    }
-               }
            }) {
                HStack {
                    Spacer()

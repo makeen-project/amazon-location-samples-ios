@@ -45,6 +45,7 @@
 		F1F4EA4D2C1C556C00759E9C /* AWSIoTEventsData in Frameworks */ = {isa = PBXBuildFile; productRef = F1F4EA4C2C1C556C00759E9C /* AWSIoTEventsData */; };
 		F1F4EA4F2C1C5D6400759E9C /* AWSIoTAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F1F4EA4E2C1C5D6400759E9C /* AWSIoTAnalytics */; };
 		F1F4EA512C1C64CA00759E9C /* AWSLocation in Frameworks */ = {isa = PBXBuildFile; productRef = F1F4EA502C1C64CA00759E9C /* AWSLocation */; };
+		F1F4EA532C28DC5500759E9C /* AmazonLocationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F4EA522C28DC5500759E9C /* AmazonLocationClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		F18CAC872B8F600800250F94 /* TrackingFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingFilterView.swift; sourceTree = "<group>"; };
 		F18CAC892B90A0B500250F94 /* ClientConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientConfigView.swift; sourceTree = "<group>"; };
 		F19F0E182B7CD27E0052A3A5 /* AWSSignatureV4Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSSignatureV4Delegate.swift; sourceTree = "<group>"; };
+		F1F4EA522C28DC5500759E9C /* AmazonLocationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmazonLocationClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				F17B274D2B7A38F40026FAA6 /* AuthViewModel.swift */,
+				F1F4EA522C28DC5500759E9C /* AmazonLocationClient.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				F17B276E2B7A39410026FAA6 /* StringConstants.swift in Sources */,
 				F18CAC802B87203D00250F94 /* TrackingViewModel.swift in Sources */,
 				F17B275F2B7A38F50026FAA6 /* TabsContentView.swift in Sources */,
+				F1F4EA532C28DC5500759E9C /* AmazonLocationClient.swift in Sources */,
 				F17B276B2B7A39310026FAA6 /* AlertPresenter.swift in Sources */,
 				F17B27642B7A39250026FAA6 /* CustomLocationFilter.swift in Sources */,
 				F17B275A2B7A38F50026FAA6 /* LoginContracts.swift in Sources */,
@@ -526,6 +530,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -700,6 +705,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -734,6 +740,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -826,14 +833,14 @@
 			repositoryURL = "https://github.com/maplibre/maplibre-gl-native-distribution";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 6.5.0;
+				minimumVersion = 6.3.3;
 			};
 		};
 		F1F4EA442C1B543900759E9C /* XCRemoteSwiftPackageReference "amazon-location-mobile-tracking-sdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/makeen-project/amazon-location-mobile-tracking-sdk-ios.git";
 			requirement = {
-				branch = iot_feature;
+				branch = iot_mqtt_feature;
 				kind = branch;
 			};
 		};
@@ -842,7 +849,7 @@
 			repositoryURL = "https://github.com/awslabs/aws-sdk-swift";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.45.0;
+				minimumVersion = 0.44.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

@@ -9,6 +9,7 @@ import AWSIoTEvents
 import AWSIoTEventsData
 import AWSIoTAnalytics
 import AWSLocation
+import os.log
 
 final class AuthViewModel : ObservableObject {
     @Published var trackingButtonText: String
@@ -84,11 +85,10 @@ final class AuthViewModel : ObservableObject {
             }
             return
         }
+
         credentialsProvider = try await authHelper.authenticateWithCognitoIdentityPool(identityPoolId: identityPoolId)
         initializeClient()
-        
         mapViewSigning()
-        
         populateFilterValues()
     }
     
@@ -101,8 +101,10 @@ final class AuthViewModel : ObservableObject {
     }
     
     func initializeClient() {
-        client = LocationTracker(provider: credentialsProvider!, trackerName: trackerName)
-        clientIntialised = true
+        DispatchQueue.main.async { [self] in
+            client = LocationTracker(provider: credentialsProvider!, trackerName: trackerName)
+            clientIntialised = true
+        }
     }
     
     func setClientConfig(timeFilter: Bool, distanceFilter: Bool, accuracyFilter: Bool, timeInterval: Double? = nil, distanceInterval: Double? = nil) {
@@ -131,6 +133,13 @@ final class AuthViewModel : ObservableObject {
         alertMessage = NSLocalizedString("locationManagerAlertText", comment: "")
         showAlert = true
     }
+    
+    func showErrorAlertPopup(title: String, message: String) {
+        alertTitle = title
+        alertMessage = message
+        showAlert = true
+        os_log("%@", type: .error, message)
+    }
 
     func startTracking() {
         do {
@@ -138,19 +147,19 @@ final class AuthViewModel : ObservableObject {
             if(client == nil) {
                 initializeClient()
             }
-           //.startBackgroundTracking(mode: .Active)
-            try client.startTracking()
+            
+            try client.startBackgroundTracking(mode: .Active)
+            Task {
+                try await subscribeToAWSNotifications()
+                try await fetchGeofenceList()
+            }
             DispatchQueue.main.async { [self] in
-
                 self.trackingButtonText = NSLocalizedString("StopTrackingLabel", comment: "")
                 self.trackingButtonColor = .red
                 self.trackingButtonIcon = "pause.circle"
                 UserDefaultsHelper.save(value: true, key: .trackingActive)
             }
-//            Task {
-//                try await fetchGeofenceList()
-//            }
-//            subscribeToAWSNotifications()
+            
         } catch TrackingLocationError.permissionDenied {
             showLocationDeniedRationale()
         } catch {
@@ -165,8 +174,11 @@ final class AuthViewModel : ObservableObject {
             {
                 initializeClient()
             }
-            try client.resumeTracking()//.resumeBackgroundTracking(mode: .Active)
-            subscribeToAWSNotifications()
+            try client.resumeBackgroundTracking(mode: .Active)
+            Task {
+                try await subscribeToAWSNotifications()
+                try await fetchGeofenceList()
+            }
             DispatchQueue.main.async { [self] in
                 self.trackingButtonText = NSLocalizedString("StopTrackingLabel", comment: "")
                 self.trackingButtonColor = .red
@@ -182,7 +194,7 @@ final class AuthViewModel : ObservableObject {
     
     func stopTracking() {
         print("Tracking Stopped...")
-        client.stopTracking()//.stopBackgroundTracking()
+        client.stopBackgroundTracking()
         //unsubscribeFromAWSNotifications()
         trackingButtonText = NSLocalizedString("StartTrackingLabel", comment: "")
         trackingButtonColor = .blue
@@ -288,13 +300,9 @@ final class AuthViewModel : ObservableObject {
         try await authWithCognito(identityPoolId: identityPoolId)
     }
     
-    private func subscribeToAWSNotifications() {
-        do {
-            try createIoTManagerIfNeeded()
-        }
-        catch {
-            print(error)
-        }
+    private func subscribeToAWSNotifications() async throws {
+            try await createIoTManagerIfNeeded()
+
 //        {
 //            guard let identityId = self.client.getDeviceId() else {
 //                return
@@ -356,43 +364,45 @@ final class AuthViewModel : ObservableObject {
         return dateFormatter.string(from: date)
     }
 
-     func createIoTManagerIfNeeded() throws {
+     func createIoTManagerIfNeeded() async throws {
         let region = AmazonLocationRegion.toRegionString(identityPoolId: identityPoolId)
-
-        iot = try AWSIoT.IoTClient(region: region)
-        iotPublisher = iot.publisher
-        let sink = iotPublisher!
-        .sink(
-            receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    print("Publisher finished successfully.")
-                case .failure(let error):
-                    print("Publisher failed with error: \(error)")
-                }
-            },
-            receiveValue: { value in
-                print("Received IoTClient value: \(value)")
-                // Handle the received value here
-//                let stringValue = NSString(data: value, encoding: String.Encoding.utf8.rawValue)!
-//                print("Message received: \(stringValue)")
-//                
-//                guard let model = try? JSONDecoder().decode(TrackingEventModel.self, from: payload) else { return }
-//                
-//                let eventText: String
-//                switch model.trackerEventType {
-//                case .enter:
-//                    eventText = NSLocalizedString("GeofenceEnterEvent", comment: "")
-//                case .exit:
-//                    eventText = NSLocalizedString("GeofenceExitEvent", comment: "")
-//                }
-//                DispatchQueue.main.async {
-//                    let title = String(format: NSLocalizedString("GeofenceNotificationTitle", comment: ""), eventText)
-//                    let description = String(format: NSLocalizedString("GeofenceNotificationDescription", comment: ""),  model.geofenceId, eventText, self.localizedDateString(from: model.eventTime))
-//                    NotificationManager.scheduleNotification(title: title, body: description)
-//                }
-            }
-        )
+         if let amazonClient = authHelper.getLocationClient() {
+             iot = try await amazonClient.initialiseIOTClient(region: region)
+            
+             iotPublisher = iot.publisher
+             let sink = iotPublisher!
+                 .sink(
+                    receiveCompletion: { completion in
+                        switch completion {
+                        case .finished:
+                            print("Publisher finished successfully.")
+                        case .failure(let error):
+                            print("Publisher failed with error: \(error)")
+                        }
+                    },
+                    receiveValue: { value in
+                        print("Received IoTClient value: \(value)")
+                        // Handle the received value here
+                        //                let stringValue = NSString(data: value, encoding: String.Encoding.utf8.rawValue)!
+                        //                print("Message received: \(stringValue)")
+                        //
+                        //                guard let model = try? JSONDecoder().decode(TrackingEventModel.self, from: payload) else { return }
+                        //
+                        //                let eventText: String
+                        //                switch model.trackerEventType {
+                        //                case .enter:
+                        //                    eventText = NSLocalizedString("GeofenceEnterEvent", comment: "")
+                        //                case .exit:
+                        //                    eventText = NSLocalizedString("GeofenceExitEvent", comment: "")
+                        //                }
+                        //                DispatchQueue.main.async {
+                        //                    let title = String(format: NSLocalizedString("GeofenceNotificationTitle", comment: ""), eventText)
+                        //                    let description = String(format: NSLocalizedString("GeofenceNotificationDescription", comment: ""),  model.geofenceId, eventText, self.localizedDateString(from: model.eventTime))
+                        //                    NotificationManager.scheduleNotification(title: title, body: description)
+                        //                }
+                    }
+                 )
+         }
     }
     
 //    private func unsubscribeFromAWSNotifications() {

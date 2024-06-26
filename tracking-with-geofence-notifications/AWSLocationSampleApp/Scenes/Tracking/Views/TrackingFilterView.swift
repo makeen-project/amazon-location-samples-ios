@@ -4,7 +4,7 @@ struct TrackingFilterView: View {
     @ObservedObject var authViewModel: AuthViewModel
 
     func setFilterValues() {
-        authViewModel.setClientConfig(timeFilter: authViewModel.timeFilter, distanceFilter: authViewModel.distanceFilter, accuracyFilter: authViewModel.accuracyFilter, timeInterval: authViewModel.timeFilter ? authViewModel.timeInterval: nil, distanceInterval: authViewModel.distanceFilter ? authViewModel.distanceInterval: nil)
+       // authViewModel.setClientConfig(timeFilter: authViewModel.timeFilter, distanceFilter: authViewModel.distanceFilter, accuracyFilter: authViewModel.accuracyFilter, timeInterval: authViewModel.timeFilter ? authViewModel.timeInterval: nil, distanceInterval: authViewModel.distanceFilter ? authViewModel.distanceInterval: nil)
     }
     
     var body: some View {
