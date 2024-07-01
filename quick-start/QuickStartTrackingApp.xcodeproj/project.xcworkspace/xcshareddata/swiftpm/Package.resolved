@@ -1,24 +1,6 @@
 {
-  "originHash" : "ec6bc3d090a78589987d65d582af3659e044854e5706f3a37c754934f5807190",
+  "originHash" : "217aa118119f332c9a34d1bba88eca364e8fa12fbe3f5e5184e8ba5f6e94cc19",
   "pins" : [
-    {
-      "identity" : "amazon-location-mobile-auth-sdk-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/makeen-project/amazon-location-mobile-auth-sdk-ios.git",
-      "state" : {
-        "branch" : "ALMS-229_Custom_Provider",
-        "revision" : "a61721d8e386f55e2a70ed591ae703ec0db028f8"
-      }
-    },
-    {
-      "identity" : "amazon-location-mobile-tracking-sdk-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/makeen-project/amazon-location-mobile-tracking-sdk-ios.git",
-      "state" : {
-        "branch" : "ALMS-215_ObjC_Bridge",
-        "revision" : "e73cf8efb4ec8170e392aa7a377693da30b4e1d3"
-      }
-    },
     {
       "identity" : "aws-crt-swift",
       "kind" : "remoteSourceControl",
@@ -33,17 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/awslabs/aws-sdk-swift",
       "state" : {
-        "branch" : "0.46.0",
-        "revision" : "3c20e0be8c8246de8b8e04372404ef1f90be71b6"
-      }
-    },
-    {
-      "identity" : "keychain-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/evgenyneu/keychain-swift.git",
-      "state" : {
-        "revision" : "d108a1fa6189e661f91560548ef48651ed8d93b9",
-        "version" : "20.0.0"
+        "revision" : "3c20e0be8c8246de8b8e04372404ef1f90be71b6",
+        "version" : "0.46.0"
       }
     },
     {

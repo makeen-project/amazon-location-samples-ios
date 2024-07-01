@@ -16,7 +16,6 @@
 		F11DE93D2BD7F3040047E398 /* CenterAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11DE93C2BD7F3040047E398 /* CenterAddressView.swift */; };
 		F11DE93F2BD805000047E398 /* UserLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11DE93E2BD805000047E398 /* UserLocationView.swift */; };
 		F120B5662C19CDCA007A55F4 /* AmazonLocationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F120B5652C19CDCA007A55F4 /* AmazonLocationClient.swift */; };
-		F14A898B2C2C417E00F155B5 /* AmazonLocationiOSTrackingSDK in Frameworks */ = {isa = PBXBuildFile; productRef = F14A898A2C2C417E00F155B5 /* AmazonLocationiOSTrackingSDK */; };
 		F1B70F342C0DE7A700649A83 /* AwsCommonRuntimeKit in Frameworks */ = {isa = PBXBuildFile; productRef = F1B70F332C0DE7A700649A83 /* AwsCommonRuntimeKit */; };
 		F1B70F362C0DE7A700649A83 /* Elasticurl in Frameworks */ = {isa = PBXBuildFile; productRef = F1B70F352C0DE7A700649A83 /* Elasticurl */; };
 		F1C6739E2C0872300055EB97 /* AWSSignatureV4Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C6739D2C0872300055EB97 /* AWSSignatureV4Delegate.swift */; };
@@ -81,7 +80,6 @@
 			files = (
 				7CB6035D2C0A6F2F00852261 /* AWSLocation in Frameworks */,
 				F11DE91C2BD25EFC0047E398 /* MapLibre in Frameworks */,
-				F14A898B2C2C417E00F155B5 /* AmazonLocationiOSTrackingSDK in Frameworks */,
 				F1B70F362C0DE7A700649A83 /* Elasticurl in Frameworks */,
 				F1B70F342C0DE7A700649A83 /* AwsCommonRuntimeKit in Frameworks */,
 			);
@@ -218,7 +216,6 @@
 				7CB6035C2C0A6F2F00852261 /* AWSLocation */,
 				F1B70F332C0DE7A700649A83 /* AwsCommonRuntimeKit */,
 				F1B70F352C0DE7A700649A83 /* Elasticurl */,
-				F14A898A2C2C417E00F155B5 /* AmazonLocationiOSTrackingSDK */,
 			);
 			productName = QuickStartTrackingApp;
 			productReference = F1E960582BCF697900192ACB /* QuickStartTrackingApp.app */;
@@ -295,7 +292,7 @@
 			packageReferences = (
 				F11DE91A2BD25EFC0047E398 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */,
 				7CB6035B2C0A6F2F00852261 /* XCRemoteSwiftPackageReference "aws-sdk-swift" */,
-				F14A89892C2C417E00F155B5 /* XCRemoteSwiftPackageReference "amazon-location-mobile-tracking-sdk-ios" */,
+				F14A898C2C32B72300F155B5 /* XCRemoteSwiftPackageReference "amazon-location-mobile-tracking-sdk-ios" */,
 			);
 			productRefGroup = F1E960592BCF697900192ACB /* Products */;
 			projectDirPath = "";
@@ -846,12 +843,12 @@
 				minimumVersion = 6.3.3;
 			};
 		};
-		F14A89892C2C417E00F155B5 /* XCRemoteSwiftPackageReference "amazon-location-mobile-tracking-sdk-ios" */ = {
+		F14A898C2C32B72300F155B5 /* XCRemoteSwiftPackageReference "amazon-location-mobile-tracking-sdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/makeen-project/amazon-location-mobile-tracking-sdk-ios.git";
+			repositoryURL = "https://github.com/aws-geospatial/amazon-location-mobile-tracking-sdk-ios";
 			requirement = {
-				branch = "ALMS-215_ObjC_Bridge";
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -866,11 +863,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F11DE91A2BD25EFC0047E398 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */;
 			productName = MapLibre;
-		};
-		F14A898A2C2C417E00F155B5 /* AmazonLocationiOSTrackingSDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F14A89892C2C417E00F155B5 /* XCRemoteSwiftPackageReference "amazon-location-mobile-tracking-sdk-ios" */;
-			productName = AmazonLocationiOSTrackingSDK;
 		};
 		F1B70F332C0DE7A700649A83 /* AwsCommonRuntimeKit */ = {
 			isa = XCSwiftPackageProductDependency;
