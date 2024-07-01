@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/makeen-project/amazon-location-mobile-auth-sdk-ios.git",
       "state" : {
-        "branch" : "ALMS-229_Custom_Provider",
-        "revision" : "a61721d8e386f55e2a70ed591ae703ec0db028f8"
+        "branch" : "iot_mqtt_feature",
+        "revision" : "126d2620d7752413ca1e1aaac19c85718afffe98"
       }
     },
     {
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/makeen-project/amazon-location-mobile-tracking-sdk-ios.git",
       "state" : {
-        "branch" : "ALMS-215_ObjC_Bridge",
-        "revision" : "e73cf8efb4ec8170e392aa7a377693da30b4e1d3"
+        "branch" : "iot_mqtt_feature",
+        "revision" : "f42ca3f05eb609b3bcc27497e57a1d368d4f430a"
       }
     },
     {
@@ -69,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-log.git",
       "state" : {
-        "revision" : "9cb486020ebf03bfa5b5df985387a14a98744537",
-        "version" : "1.6.1"
+        "revision" : "b3a637307772d20291d78a5b7a0d4204d9b1e981",
+        "version" : "1.6.0"
       }
     }
   ],
